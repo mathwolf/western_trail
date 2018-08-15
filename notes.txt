@@ -1,0 +1,12 @@
+Board class contains all parts of game where players interact with common
+resources.
+
+tile_stack_1, etc.      deck of tiles labeled 1,2,3
+trail
+job_market              area where workers can be drafted
+foresight               tiles in foresight area
+cattle_market_deck      shared cattle cards
+cattle_market           cards displayed for sale
+objective_deck          common objective cards
+objective_display       4 face up cards available to take
+bank                    <int> amount of money held in bank
