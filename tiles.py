@@ -7,6 +7,25 @@ class TileSpace(object):
         self.empty = True
         self.occupant = 0
 
+class TokenSpace(object):
+    def __init__(self):
+        self.name = ''
+        self.color = 'none'
+        self.empty = True
+        self.singlton = True
+        self.tokens = []
+
+    def add_token(object, color):
+        self.tokens.append(color)
+        self.empty = False
+
+    def remove_token(object, color):
+        try:
+            self.tokens.index(color)
+        except ValueError:
+            return False
+        else:
+            return True
 
 def setup_tile_stack_1(stack):
     # Add blue trader cards

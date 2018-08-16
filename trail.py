@@ -28,6 +28,21 @@ class TrailSpace(object):
             return False
 '''
 
+def find_locations(t, start, moves):
+    locations = set()
+    for link in t[start].links:
+        # Find next space that is full or splits in two
+        if t[link].index == 48:
+            # in KC
+            locations.add(48)
+        elif t[link].empty:
+            locations.add(find_locations(trail, link, moves))
+        else:
+            locations.add(link)
+            if moves > 1:
+                locations.add(find_locations(trail, link, moves - 1))
+    return locations
+
 def setupTrail(t):
     BONUS1 = 1
     BONUS2 = 2

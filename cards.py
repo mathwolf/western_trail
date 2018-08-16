@@ -54,6 +54,51 @@ def setup_cattle_market(players, cm, deck):
         current_space.empty = False
         cm.append(current_space)
 
+def setup_player_cattle_deck(deck, color):
+    for i in range(0,5):
+        current_card = {
+            'name': 'Jersey',
+            'color': 'grey',
+            'star': color,
+            'cost': 1,
+            'points': 0,
+            }
+        deck.append(current_card)
+    for i in range(0,3):
+        current_card = {
+            'name': 'Guernsey',
+            'color': 'white',
+            'star': color,
+            'cost': 2,
+            'points': 0,
+            }
+        deck.append(current_card)
+    for i in range(0,3):
+        current_card = {
+            'name': 'Black Angus',
+            'color': 'black',
+            'star': color,
+            'cost': 2,
+            'points': 0,
+            }
+        deck.append(current_card)
+    for i in range(0,3):
+        current_card = {
+            'name': 'Dutch Belt',
+            'color': 'green',
+            'star': color,
+            'cost': 2,
+            'points': 0,
+            }
+        deck.append(current_card)
+
+def setup_player_hand(deck, hand):
+    for i in range (0,4):
+        current_space = tiles.TileSpace();
+        current_space.occupant = deck.pop()
+        current_space.empty = False
+        hand.append(current_space)
+
 def setup_objective_deck(deck):
     for i in range (0,24):
         current_card = {
@@ -63,9 +108,24 @@ def setup_objective_deck(deck):
             }
         deck.append(current_card)
 
-def setupObjectiveDisplay(od, deck):
+def setup_objective_display(disp, deck):
     for i in range(0, 4):
         current_space = tiles.TileSpace()
         current_space.occupant = deck.pop()
         current_space.empty = False
-        od.append(current_space)
+        disp.append(current_space)
+
+def setup_player_objective_deck(deck):
+    for i in range(0,4):
+        current_card = {
+            'name': 'Objective Card ' + str(i),
+            'gain': 3,
+            'loss': 0,
+            }
+        deck.append(current_card)
+
+def setup_player_objective_display(disp, deck):
+    current_space = tiles.TileSpace()
+    current_space.occupant = deck.pop()
+    current_space.empty = False
+    disp.append(current_space)

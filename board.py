@@ -1,13 +1,12 @@
 import random
 
+import config
 import tiles
 import buildings
 import cards
 import trail
 import workers
 import bank
-
-players = 3
 
 class Board(object):
     def __init__(self):
@@ -52,7 +51,7 @@ class Board(object):
 
         # Create the cattle market and deal seven cards
         cm = []
-        cards.setup_cattle_market(players, cm, cmdeck)
+        cards.setup_cattle_market(config.players, cm, cmdeck)
         ######## add a step to sort the cattle cards for proper display
         self.cattle_market_deck = cmdeck
         self.cattle_market = cm
@@ -61,11 +60,18 @@ class Board(object):
         objdeck = []
         cards.setup_objective_deck(objdeck)
         random.shuffle(objdeck)
+
+        # Create the deck of initial player objective cards
+        player_objdeck = []
+        cards.setup_player_objective_deck(player_objdeck)
+        random.shuffle(player_objdeck)
+
         # Create the objective display area and deal four cards
         objdisp = []
-        cards.setupObjectiveDisplay(objdisp, objdeck)
+        cards.setup_objective_display(objdisp, objdeck)
         self.objective_deck = objdeck
         self.objective_display = objdisp
+        self.player_objective_deck = player_objdeck
 
         # Create the bank.  For now, we assume that all coins have size 1 unit.
         b = bank.Bank()
