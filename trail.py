@@ -8,7 +8,7 @@ class TrailSpace(object):
                     'water_hazard', 'sand_hazard','rock_hazard','trader', 'end'
         occupant:   <dict> refers to specific building, etc in the space
                     possibly use an int to refer to indices
-        action:     <str> or <int> possible bonus action associated with
+        action_list:     <obj> list of<str> or <int> possible bonus action associated with
                     risk spaces
         links:      <list> ints containing indices for spaces that directly
                     follow this space on the trail
@@ -36,11 +36,11 @@ def find_locations(t, start, moves):
             # in KC
             locations.add(48)
         elif t[link].empty:
-            locations.add(find_locations(trail, link, moves))
+            locations.update(find_locations(t, link, moves))
         else:
             locations.add(link)
             if moves > 1:
-                locations.add(find_locations(trail, link, moves - 1))
+                locations.update(find_locations(t, link, moves - 1))
     return locations
 
 def setupTrail(t):
@@ -92,7 +92,7 @@ def setupTrail(t):
 
     # Middle segment of trail
 
-    current_space = TrailSpace(20, 'neutral', 0, [21, 30])
+    current_space = TrailSpace(20, 'neutral', 0, [21, 31])
     t.append(current_space)
 
     current_space = TrailSpace(21, 'player', 0, [22, 30])
@@ -124,7 +124,7 @@ def setupTrail(t):
         current_space = TrailSpace(i, 'hazard', 0, [i+1])
         t.append(current_space)
 
-    current_space = TrailSpace(38, 'player', BONUS5, [29])
+    current_space = TrailSpace(38, 'player', BONUS5, [39])
     t.append(current_space)
 
     current_space = TrailSpace(39, 'player', BONUS6, [42])
@@ -136,19 +136,19 @@ def setupTrail(t):
 
     # Top of trail at left
 
-    current_space = TrailSpace(42, 'neutral', 0, [43, 45])
+    current_space = TrailSpace(42, 'neutral', 0, [43, 44])
     t.append(current_space)
 
-    current_space = TrailSpace(43, 'player', 0, [44])
+    current_space = TrailSpace(43, 'player', 0, [45])
     t.append(current_space)
 
-    current_space = TrailSpace(44, 'player', 0, [48])
+    current_space = TrailSpace(44, 'player', 0, [45])
     t.append(current_space)
 
-    current_space = TrailSpace(45, 'player', 0, [46])
+    current_space = TrailSpace(45, 'neutral', 0, [46, 47])
     t.append(current_space)
 
-    current_space = TrailSpace(46, 'neutral', 0, [47])
+    current_space = TrailSpace(46, 'neutral', 0, [48])
     t.append(current_space)
 
     current_space = TrailSpace(47, 'player', 0, [48])
@@ -226,7 +226,7 @@ def setupTrailAddTiles(ts1, trail):
 
 # Add neutral buildings to trail
 def setupTrailAddBuildings(n, trail):
-        location_list = [1, 11, 20, 30, 33, 42, 46]
+        location_list = [1, 11, 20, 30, 33, 42, 45]
         for i in range(0,7):
             current_building = n.pop()
             current_space = location_list[i]

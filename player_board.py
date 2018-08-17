@@ -99,13 +99,26 @@ class PlayerCowboySpace(object):
             current_space.permanent = False
             current_space.empty = True
             if i == 3:
-                current_space.bonus = 'Cowboy bonus 1'
+                current_space.bonus = 'remove_hazard_free'
             elif i == 5:
-                current_space.bonus = 'Cowboy bonus 2'
+                current_space.bonus = 'remove_trader'
             else:
                 current_space.bonus = 'none'
             cowboy_display.append(current_space)
         self.cowboy_display = cowboy_display
+
+    def self.full():
+        if self.value == 6:
+            return True
+        else:
+            return False
+
+    def self.add_tile():
+        i = self.value
+        self.cowboy_display[i].empty = False
+        self.value += 1
+        if not current_space.bonus == 'none':
+            io.io_choose_action([current_space.bonus])
 
 class PlayerBuilderSpace(object):
     def __init__(self):
@@ -130,6 +143,12 @@ class PlayerBuilderSpace(object):
             builder_display.append(current_space)
         self.builder_display = builder_display
 
+    def self.full():
+        if self.value == 6:
+            return True
+        else:
+            return False
+
 class PlayerEngineerSpace(object):
     def __init__(self):
         self.value = 1
@@ -148,11 +167,19 @@ class PlayerEngineerSpace(object):
             engineer_display.append(current_space)
         self.engineer_display = engineer_display
 
+    def self.full():
+        if self.value == 6:
+            return True
+        else:
+            return False
+
 class PlayerBoard(object):
     def __init__(self, color, player_objective_deck):
         # Location of tokens on board
+        self.color = color
         self.man = 0
         self.train = 0
+        self.bank = 0
 
         # Create the player buildings
         b = []
@@ -180,6 +207,11 @@ class PlayerBoard(object):
         obj = []
         cards.setup_player_objective_display(obj, player_objective_deck)
         self.objective_deck = obj
+
+        # Create empty lists for hazard tiles and trader tiles.
+        self.hazard_list = []
+        self.trader_list = []
+
 
         # Create the auxiliary actions, movement, and hand size spaces
         bonus_spaces = PlayerBonusSpaces(color)

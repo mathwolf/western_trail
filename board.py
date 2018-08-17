@@ -24,7 +24,8 @@ class Board(object):
         # Create and shuffle the neutral buildings
         n = []
         buildings.setup_neutral_buildings(n)
-        random.shuffle(n)
+        # random.shuffle(n)
+        ############# Turn off neutral shuffles to help debgging
 
         # Create the trail area of the board
         t = []

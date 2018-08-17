@@ -10,6 +10,7 @@ def setupJobMarket(jm, ts2):
             current_tile = ts2.pop()
             current_space.occupant = current_tile
             current_space.empty = False
+        current_space.cost = 6
         jm[0].append(current_space)
 
     jm.append([])
@@ -25,14 +26,16 @@ def setupJobMarket(jm, ts2):
             current_tile = ts2.pop()
             current_space.occupant = current_tile
             current_space.empty = False
+        current_space.cost = 6
         jm[1].append(current_space)
 
+    cost_list = [7, 5, 7, 9, 6, 8, 10, 6, 5, 4]
     for r in range(2,12):
         jm.append([])
         for c in range(0,4):
             current_space = tiles.TileSpace()
             jm[r].append(current_space)
-
+        current_space.cost = cost-list[r-2]
 
 def setupForesight(f, ts1, ts2 ,ts3):
     for r in range(0,2):

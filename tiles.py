@@ -6,6 +6,7 @@ class TileSpace(object):
         '''
         self.empty = True
         self.occupant = 0
+        self.cost = 0
 
 class TokenSpace(object):
     def __init__(self):

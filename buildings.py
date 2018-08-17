@@ -1,9 +1,22 @@
+import act
+
 def setup_neutral_buildings(stack):
+    letter_list = ['G', 'F', 'E', 'D', 'C', 'B', 'A']
+    action_list = [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        ['sell_white_2', 'buy_worker']
+        ]
     for i in range(0,7):
-        name = 'Neutral Building ' + str(i + 1)
+        name = 'Neutral Building ' + letter_list[i]
         current_building = {
             'category': 'neutral',
             'name': name,
+            'action_list': action_list[i]
             }
         stack.append(current_building)
 
