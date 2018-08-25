@@ -111,8 +111,12 @@ def choose_row(p, color):
                 if current_row.color_allowed(color):
                     possible_rows.append(i)
                     j += 1
-                    print '  ' + str(i+1) + ': row ' + str(i+1) + ', ' \
-                        + str(current_row.capacity()) + ' spaces free'
+                    if current_row.capacity() == 1:
+                        print '  ' + str(i+1) + ': Row ' + str(i+1) + ', ' \
+                            + '1 space free'
+                    else:
+                        print '  ' + str(i+1) + ': Row ' + str(i+1) + ', ' \
+                            + str(current_row.capacity()) + ' spaces free'
                 else:
                     print '  ' + str(i+1) + ': Not allowed.'
 
@@ -130,6 +134,7 @@ def choose_row(p, color):
                 raw_input('Hit enter to continue. ')
                 return -1
 
+        print '  6: Place tiles in penalty row.'
         selection = raw_input('Select a row for your tiles: ')
         try:
             selection_int = int(selection)
@@ -137,10 +142,14 @@ def choose_row(p, color):
             print 'Invalid option.  Your choice must be a number.'
             continue
         else:
-            if selection_int < 1 or selection_int > 5:
+            if selection_int < 1 or selection_int > 6:
                 print 'Invalid option.  Your number is out of range.'
                 continue
 
+            # Player has chosen to put tiles in the penalty row.
+            if selection_int == 6:
+                return -1
+            # Player has chosen a pattern line.
             try:
                 possible_rows.index(selection_int - 1)
             except ValueError:
