@@ -142,7 +142,7 @@ class TileStack(object):
     def shuffle(self):
         random.shuffle(self.stack)
 
-    def sort(self):
+'''    def sort(self):
         # Sort tiles by color.
         color_list = []
         for i in range(self.len()):
@@ -150,7 +150,7 @@ class TileStack(object):
         color_list.sort()
         for i in range(self.len()):
             self.stack[i].color = color_list[i]
-
+'''
 
 # Access to draw and discard bags, common area, and list of player boards.
 

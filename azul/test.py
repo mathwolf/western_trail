@@ -13,6 +13,7 @@ pattern_lines = config.player_area_list[p].pattern_lines
 wall = config.player_area_list[p].wall
 
 # Set up test tiles
+'''
 test_stack = []
 current_row = config.TileStack()
 current_row.add_tiles(['blue', 'yellow', 'red', 'black', 'white'])
@@ -28,6 +29,24 @@ current_row.add_tiles(['blue', 'yellow', 'black', 'white'])
 test_stack.append(current_row)
 current_row = config.TileStack()
 current_row.add_tiles(['black', 'yellow', 'white'])
+test_stack.append(current_row)
+'''
+
+test_stack = []
+current_row = config.TileStack()
+current_row.add_tiles(['blue', 'yellow', 'black'])
+test_stack.append(current_row)
+current_row = config.TileStack()
+current_row.add_tiles(['blue', 'yellow', 'red', 'white', 'black'])
+test_stack.append(current_row)
+current_row = config.TileStack()
+current_row.add_tiles(['blue', 'yellow'])
+test_stack.append(current_row)
+current_row = config.TileStack()
+current_row.add_tiles(['blue'])
+test_stack.append(current_row)
+current_row = config.TileStack()
+current_row.add_tiles(['blue', 'white'])
 test_stack.append(current_row)
 
 # Set effect of wall tiles on forbidden tile list

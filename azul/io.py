@@ -118,7 +118,7 @@ def choose_row(p, color):
 
         if not possible_rows:
             penalty_row = config.player_area_list[p].penalty_row
-            if not penalty_row.full():
+            if penalty_row.full():
                 print 'No pattern lines available for this color.'
                 print 'Penalty row is full.  Must discard tiles.  '
                 raw_input('Hit enter to continue. ')

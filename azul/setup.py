@@ -6,7 +6,7 @@ def setup_draw_bag():
     color_list = ['red', 'yellow', 'blue', 'white', 'black']
     for i in range(0,5):
         ##################### for j in range(0,20):
-        for j in range(4):
+        for j in range(20):
             current_tile = config.Tile()
             current_tile.color = color_list[i]
             draw_bag.add_tiles([current_tile])
@@ -42,9 +42,9 @@ def setup_factories(players):
     draw_bag = config.common_area.draw_bag
     center = config.common_area.center
 
-    ############ factory_number = 5 + 2 * (players - 1)
-    factory_number = 2
-    for i in range(0, factory_number):
+    factory_number = 5 + 2 * (players - 2)
+    ################ factory_number = 2
+    for i in range(factory_number):
         current_factory = config.TileStack()
         factory_list.append(current_factory)
 
@@ -52,6 +52,7 @@ def setup_factories(players):
     start_tile = config.Tile()
     start_tile.color = 'start'
     center.add_tiles([start_tile])
+
     '''
     # Adapt the center so that it is considered empty if it contains only
     # the penalty tile.

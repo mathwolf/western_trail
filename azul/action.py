@@ -1,6 +1,7 @@
 import config
 import io
 import debug
+from operator import attrgetter
 
 def deal_to_factories():
     factory_list = config.common_area.factory_list
@@ -15,7 +16,8 @@ def deal_to_factories():
     for i in range(len(factory_list)):
         if draw_bag.len() >= 4:
             tile_list = draw_bag.remove_tiles(4)
-            tile_list.sort()
+            tile_list = sorted(tile_list, key=attrgetter('color'), \
+                reverse = True)
             factory_list[i].add_tiles(tile_list)
         else:
             tile_list = draw_bag.remove_tiles(draw_bag.len())
@@ -23,7 +25,8 @@ def deal_to_factories():
             # Shuffle the discard bag and add it to the draw bag.
             if discard.len() == 0:
                 # Return to play with incomplete factories.
-                tile_list.sort()
+                tile_list = sorted(tile_list, key=attrgetter('color'), \
+                    reverse = True)
                 factory_list[i].add_tiles(tile_list)
                 break
             discard_tiles = discard.remove_tiles(discard.len())
@@ -33,7 +36,8 @@ def deal_to_factories():
                 tile_list.extend(draw_bag.remove_tiles(remainder))
             else:
                 tile_list.extend(draw_bag.remove_tiles(draw_bag.len()))
-            tile_list.sort()
+            tile_list = sorted(tile_list, key=attrgetter('color'), \
+                reverse = True)
             factory_list[i].add_tiles(tile_list)
 
 def add_to_penalty(p, color, n):
@@ -86,7 +90,8 @@ def pick_up_tiles(p):
         # All remaining tiles go to the center.
         remaining_tiles = factory.remove_tiles(factory.len())
         center.add_tiles(remaining_tiles)
-        center.sort()
+        center.stack = sorted(center.stack, key=attrgetter('color'))
+
     else:
         # If the center contains the starting tile, move it to the player's
         # penalty row.
@@ -231,7 +236,9 @@ def calculate_bonus():
             color_bonus = True
             # Check each row to see if it contains color j in the list.
             for i in range(5):
-                if pattern_lines[i].color_allowed(color_list[j]):
+                try:
+                    pattern_lines[i].forbidden_colors.index(color_list[j])
+                except ValueError:
                     color_bonus = False
                     break
             if color_bonus == True:

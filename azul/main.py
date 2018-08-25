@@ -5,7 +5,6 @@ import debug
 
 players = 2
 config.players = players
-
 setup.setup_draw_bag()
 setup.setup_players()
 
@@ -19,19 +18,18 @@ for i in range (0, config.common_area.draw_bag.len()):
 setup.setup_factories(config.players)
 
 while True:
-    # Loop for a round of moving tiles from pattern lines to wall.
-    # First, check to see if the game is over.
+    # Loop for a round beginning with a deal of tiles from the draw bag and
+    # ending with scoring the wall.
 
     # Distribute tiles from the discard bag to the factories.
     action.deal_to_factories()
-    # Loop for one round of picking up tiles.
-
     # Check to see if the game is over.
     if config.game_over:
         break
 
     i = config.starting_player
     while True:
+        # Loop for each players picking up tiles from the factory
         while i < players:
             # Check to see if the round is over.
             round_over = True
@@ -72,7 +70,17 @@ while True:
     # Shuffle the discard bag to prepare for next deal.
     config.common_area.discard.shuffle()
 
-# Game over.  Display final scores.
+# Game over.  Calculate bonus and display final scores.
+old_scores = []
+for i in range(players):
+    old_scores.append(config.player_area_list[i].score)
+action.calculate_bonus()
+print ''
+print 'GAME OVER'
+print 'BONUS SCORES'
+for i in range(players):
+    print '  Player ' + str(i+1) + ': ' + \
+        str(config.player_area_list[i].score - old_scores[i])
 print 'FINAL SCORES'
 for i in range(players):
     print '  Player ' + str(i+1) + ': ' + \
